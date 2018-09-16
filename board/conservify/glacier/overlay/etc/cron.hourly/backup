@@ -1,0 +1,4 @@
+#!/bin/bash
+# -*- mode: sh -*-
+
+rsync -zvua --progress /data/geophone/archive ubuntu@code.conservify.org:/svr0/glacier | /usr/bin/logger -t local-backup 2>&1

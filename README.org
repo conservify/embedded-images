@@ -1,5 +1,8 @@
 * Introduction
 
+  This repository contains automated tools for building various embedded images.
+  Primarily buildroot based ones for use in long running sensor installations.
+
 * Dependencies
 ** buildessential
 ** golang
@@ -11,18 +14,11 @@
   Note: The post-build script adds the user's public key to the authorized_keys files of the image!
 
 * TODO
-** Configure Wireguard
-** Configure rsyslog
-** Configure logrotate
-** Configure time sync
-** Configure schedule
-** Packages
+*** wireguard
+*** rsyslog
+*** networking
 *** tunneler
 *** adc
 *** uploader
 *** renderer
-*** morningstar
 *** resilience
-*** cleanup
-*** data-roller
-*** status
