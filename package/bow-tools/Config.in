@@ -1,0 +1,4 @@
+config BR2_PACKAGE_BOW_TOOLS
+        bool "bow-tools"
+        help
+          Tools from the glacier project.
