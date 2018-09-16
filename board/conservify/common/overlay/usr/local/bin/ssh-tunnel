@@ -1,0 +1,7 @@
+#!/bin/sh
+# -*- mode: sh -*-
+
+while /bin/true; do
+    ssh -y -N -R 13000:127.0.0.1:22 tunnel@code.conservify.org 2>&1 | /usr/bin/logger -t ssh-tunnel
+    sleep 10
+done
