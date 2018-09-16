@@ -1,0 +1,38 @@
+#!/bin/sh
+# -*- mode: sh -*-
+
+NAME=wireguard
+
+# Read config file if it is present.
+if [ -r /etc/default/$NAME ]; then
+  . /etc/default/$NAME
+fi
+
+case "$1" in
+  start)
+    printf "Starting $NAME: "
+    for iface in /etc/private/wg/*.conf; do
+      wg-quick up $iface
+    done
+    [ $? = 0 ] && echo "OK" || echo "FAIL"
+    ;;
+  stop)
+    printf "Stopping $NAME: "
+    for iface in /etc/private/wg/*.conf; do
+      wg-quick down $iface
+    done
+    [ $? = 0 ] && echo "OK" || echo "FAIL"
+    ;;
+  restart|reload)
+    echo "Restarting $NAME: "
+    $0 stop
+    sleep 1
+    $0 start
+    ;;
+  *)
+    echo "Usage: $0 {start|stop|restart|reload}" >&2
+    exit 1
+    ;;
+esac
+
+exit 0

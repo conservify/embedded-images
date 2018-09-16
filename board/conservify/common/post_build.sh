@@ -31,6 +31,7 @@ HOSTNAME=$(head -n 1 ${TARGET_DIR}/etc/hostname)
 echo "Using HOSTNAME=${HOSTNAME}"
 
 mkdir -p ${TARGET_PRIVATE}
+chmod 700 ${TARGET_PRIVATE}
 cp ${PRIVATE}/*.id_rsa* ${TARGET_PRIVATE}
 chmod 600 ${TARGET_PRIVATE}/*.id_rsa
 chmod 600 ${TARGET_PRIVATE}/*.id_rsa.pub
@@ -46,6 +47,8 @@ fi
 if [ -d ${PRIVATE}/wg/${HOSTNAME} ]; then
     mkdir -p ${TARGET_PRIVATE}/wg
     cp -ar ${PRIVATE}/wg/${HOSTNAME}/* ${TARGET_PRIVATE}/wg
+    chmod 700 ${TARGET_PRIVATE}/wg
+    chmod 600 ${TARGET_PRIVATE}/wg/*
 else
     echo "No wireguard configuration found!"
 fi
