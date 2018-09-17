@@ -16,6 +16,9 @@ fi
 # ----------------------------------------------------------
 # Allow the user creating the image to login over SSH.
 if [ -f ~/.ssh/id_rsa.pub ]; then
+    mkdir -p ${TARGET_DIR}/root/.ssh
+    chmod 700 ${TARGET_DIR}/root/.ssh
+
     if [ -f ${TARGET_DIR}/root/.ssh/authorized_keys ]; then
         rm ${TARGET_DIR}/root/.ssh/authorized_keys
     fi
