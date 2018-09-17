@@ -11,7 +11,7 @@ fi
 case "$1" in
   start)
     printf "Starting $NAME: "
-    start-stop-daemon -S -q -b -x /usr/local/bin/ssh-tunnel -- -g
+    start-stop-daemon -S -q -b -x /usr/local/bin/ssh-tunnel
     [ $? = 0 ] && echo "OK" || echo "FAIL"
     ;;
   stop)
