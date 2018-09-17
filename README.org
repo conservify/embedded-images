@@ -14,9 +14,5 @@
   Note: The post-build script adds the user's public key to the authorized_keys files of the image!
 
 * TODO
-*** Improve networking. This means only starting wireguard after we have an
-    external connection and also means to continue trying to bring networking up
-    once we're running.
-
 *** Start adc, uploader, renderer
-*** Start resilience
+*** Start resilience, update behavior.

@@ -6,6 +6,8 @@ source /etc/private/private.env
 function online() {
     echo "ONLINE!"
 
+    date > /tmp/online
+
     for i in /etc/network/online/S??*; do
         [ ! -f "$i" ] && continue
 
@@ -14,6 +16,13 @@ function online() {
     done
 }
 
+# Create file with started timestamp. Note that this becomes useless once we've
+# got the time from NTP. Not all installs will have an RTC.
+if [ ! -f /tmp/started ]; then
+    date > /tmp/started
+fi
+
+# For each of our interface configurations, bring them up.
 for i in /etc/network/interfaces /etc/network/interfaces.??; do
     [ ! -f "$i" ] && continue
 
@@ -28,6 +37,12 @@ for i in /etc/network/interfaces /etc/network/interfaces.??; do
     fi
 done
 
+# Placeholder for how we're checking the last time we were online.
+if [ -f /tmp/online ]; then
+    ONLINE_AGO=$(($(date +%s) - $(date -r /tmp/online +%s)))
+fi
+
+# Check to see if we're online.
 if ping -c 1 8.8.8.8 > /dev/null; then
     online
 else
