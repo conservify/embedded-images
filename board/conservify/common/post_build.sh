@@ -5,12 +5,18 @@ set -xe
 # ----------------------------------------------------------
 # Pre-generate dropbear host key.
 if [ ! -d ${TARGET_DIR}/etc/dropbear ]; then
-    rm ${TARGET_DIR}/etc/dropbear
+    rm -rf ${TARGET_DIR}/etc/dropbear
     mkdir -p ${TARGET_DIR}/etc/dropbear
 fi
 
 if [ ! -f ${TARGET_DIR}/etc/dropbear/dropbear_rsa_host_key ]; then
+    echo "Generating new dropbear_rsa_host_key..."
     dropbearkey -t rsa -f ${TARGET_DIR}/etc/dropbear/dropbear_rsa_host_key
+fi
+
+if [ ! -f ${TARGET_DIR}/etc/dropbear/dropbear_ecdsa_host_key ]; then
+    echo "Generating new dropbear_ecdsa_host_key..."
+    dropbearkey -t ecdsa -f ${TARGET_DIR}/etc/dropbear/dropbear_ecdsa_host_key
 fi
 
 # ----------------------------------------------------------
