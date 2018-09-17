@@ -1,0 +1,35 @@
+#!/bin/bash
+# -*- mode: sh -*-
+
+source /etc/private/private.env
+
+function online() {
+    echo "ONLINE!"
+
+    for i in /etc/network/online/S??*; do
+        [ ! -f "$i" ] && continue
+
+        echo "Running $i..."
+        $i start || true
+    done
+}
+
+for i in /etc/network/interfaces /etc/network/interfaces.??; do
+    [ ! -f "$i" ] && continue
+
+    echo "Looking for network, trying $i..."
+
+    if ifup -a -i "$i"; then
+        echo "Successfully configured interfaces"
+        break
+    else
+        echo "ERROR: ifup failed "
+        sleep 1
+    fi
+done
+
+if ping -c 1 8.8.8.8 > /dev/null; then
+    online
+else
+    exit 2
+fi

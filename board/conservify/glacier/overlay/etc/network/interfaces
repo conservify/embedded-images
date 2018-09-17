@@ -1,0 +1,17 @@
+#
+# /etc/network/interfaces
+# interfaces(5) file used by ifup(8) and ifdown(8)
+
+auto lo
+     iface lo inet loopback
+
+# Primary connectivity over radio link, no DHCP on this network.
+auto eth0
+     iface eth0 inet static
+     address 169.254.128.130
+     netmask 255.255.255.0
+     broadcast 169.254.128.255
+
+# During testing, very handy to have the machine pull an IP from DHCP.
+auto eth0:0
+     iface eth0:0 inet dhcp

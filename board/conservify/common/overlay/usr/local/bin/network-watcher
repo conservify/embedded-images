@@ -1,16 +1,10 @@
 #!/bin/bash
 # -*- mode: sh -*-
 
-source /etc/private/private.env
-
-function online() {
-  echo ONLINE
-}
-
-while /bin/true; do
-  echo Looking for network...
-  # DHCP on eth0
-  # Try known static networks
-  # Try wifi
-  sleep 10
+while true; do
+    if /usr/local/bin/network-finder | logger -t network-finder 2>&1; then
+        sleep 300
+    else
+        sleep 30
+    fi
 done
