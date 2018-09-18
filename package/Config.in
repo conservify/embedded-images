@@ -1,3 +1,4 @@
 menu "Conservify"
      source "$BR2_EXTERNAL_CONSERVIFY_PATH/package/bow-tools/Config.in"
+     source "$BR2_EXTERNAL_CONSERVIFY_PATH/package/openjdk/Config.in"
 endmenu
