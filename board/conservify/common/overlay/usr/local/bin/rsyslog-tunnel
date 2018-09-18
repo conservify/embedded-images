@@ -1,0 +1,9 @@
+#!/bin/sh
+# -*- mode: sh -*-
+
+source /etc/private/private.env
+
+while /bin/true; do
+    ssh -i /etc/private/tunnel.id_rsa.dropbear -y -N -L 10514:127.0.0.1:514 ${SSH_TUNNEL_END} 2>&1 | /usr/bin/logger -t rsyslog-tunnel
+    sleep 10
+done
