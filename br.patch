@@ -11,3 +11,29 @@ index 73f14cc..57dd00b 100644
  GO_SITE = https://storage.googleapis.com/golang
  GO_SOURCE = go$(GO_VERSION).src.tar.gz
  
+diff --git a/package/go/go.mk b/package/go/go.mk
+index 73f14cc..57dd00b 100644
+--- a/package/go/go.mk
++++ b/package/go/go.mk
+@@ -4,7 +4,7 @@
+ #
+ ################################################################################
+ 
+-GO_VERSION = 1.10.2
++GO_VERSION = 1.11
+ GO_SITE = https://storage.googleapis.com/golang
+ GO_SOURCE = go$(GO_VERSION).src.tar.gz
+ 
+diff --git a/package/jamvm/jamvm.mk b/package/jamvm/jamvm.mk
+index 3fcf460..42cfd87 100644
+--- a/package/jamvm/jamvm.mk
++++ b/package/jamvm/jamvm.mk
+@@ -21,7 +21,7 @@ JAMVM_CONF_OPTS = \
+ # jamvm has ARM assembly code that cannot be compiled in Thumb2 mode,
+ # so we must force traditional ARM mode.
+ ifeq ($(BR2_arm),y)
+-JAMVM_CONF_ENV = CFLAGS="$(TARGET_CFLAGS) -marm"
++JAMVM_CONF_ENV = CFLAGS="$(TARGET_CFLAGS) -marm -march=armv7-a"
+ endif
+ 
+ # Needed for autoreconf
