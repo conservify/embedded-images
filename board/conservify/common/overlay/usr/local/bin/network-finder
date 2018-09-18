@@ -30,7 +30,6 @@ for i in /etc/network/interfaces /etc/network/interfaces.??; do
 
     if ifup -a -i "$i"; then
         echo "Successfully configured interfaces"
-        break
     else
         echo "ERROR: ifup failed "
         sleep 1
