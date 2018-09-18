@@ -3,6 +3,6 @@
 # interfaces(5) file used by ifup(8) and ifdown(8)
 
 auto wlan0
-        iface wlan0 inet dhcp
-        pre-up wpa_supplicant -D nl80211 -i wlan0 -c /etc/private/wpa_supplicant.conf -B
-        post-down killall -q wpa_supplicant
+     iface wlan0 inet dhcp
+     pre-up wpa_supplicant -D nl80211 -i wlan0 -c /etc/private/wpa_supplicant.conf -B
+     post-down killall -q wpa_supplicant
