@@ -3,15 +3,18 @@
   This repository contains automated tools for building various embedded images.
   Primarily buildroot based ones for use in long running sensor installations.
 
+** Common
+** Glacier
+** Lodge
+** Wifi Station
 * Dependencies
 ** buildessential
 ** golang
 ** dropbear
 ** wireguard
-
 * Warnings
   
-  Note: The post-build script adds the user's public key to the authorized_keys files of the image!
+  Note: The post_build script adds the user's public key to the authorized_keys files of the image!
 
 * TODO
 *** Start adc, uploader, renderer
