@@ -14,6 +14,7 @@
 ** Wifi Station
 *** Dependencies
 **** openjdk-8 (openjdk-9 fails building classpath)
+**** oracle-10 jdk
 * Warnings
   
   Note: The post_build script adds the user's public key to the authorized_keys files of the image!
