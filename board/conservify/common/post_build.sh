@@ -87,7 +87,6 @@ else
     echo "No local private area."
 fi
 
-
 # This is weird, I know. For some reason when things are hardlinked they end up
 # as empty files on the running system. Everything in the cpio seems fine. This
 # is a work around until I know why exactly.

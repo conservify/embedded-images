@@ -22,7 +22,7 @@ OPENJDK_CONF_OPTS = \
 	--with-jvm-interpreter=cpp \
 	--with-jvm-variants=zero \
 	--enable-openjdk-only \
-  --with-stdc++lib=dynamic \
+  --with-stdc++lib=static \
 	--with-jvm-variants=$(OPENJDK_VARIANT) \
 	--with-freetype-include=$(STAGING_DIR)/usr/include/freetype2 \
 	--with-freetype-lib=$(STAGING_DIR)/usr/lib \
@@ -44,15 +44,15 @@ OPENJDK_LICENSE = GPLv2+ with exception
 OPENJDK_LICENSE_FILES = COPYING
 
 define OPENJDK_CONFIGURE_CMDS
-	mkdir -p $(STAGING_DIR)/hotspot/lib
-	touch $(STAGING_DIR)/hotspot/lib/sa-jdi.jar
-	mkdir -p $(STAGING_DIR)/hotspot/jre/lib/$(OPENJDK_HOTSPOT_ARCH)/server
+	#mkdir -p $(STAGING_DIR)/hotspot/lib
+	#touch $(STAGING_DIR)/hotspot/lib/sa-jdi.jar
+	#mkdir -p $(STAGING_DIR)/hotspot/jre/lib/$(OPENJDK_HOTSPOT_ARCH)/server
 	#cp $(TARGET_DIR)/usr/lib/libjvm.so $(STAGING_DIR)/hotspot/jre/lib/$(OPENJDK_HOTSPOT_ARCH)/server
-	mkdir -p $(STAGING_DIR)/usr/lib/jvm/lib/$(OPENJDK_HOTSPOT_ARCH)/server
+	#mkdir -p $(STAGING_DIR)/usr/lib/jvm/lib/$(OPENJDK_HOTSPOT_ARCH)/server
 	#cp $(TARGET_DIR)/usr/lib/libjvm.so $(STAGING_DIR)/usr/lib/jvm/lib/$(OPENJDK_HOTSPOT_ARCH)/server
-	ln -sf server $(STAGING_DIR)/hotspot/jre/lib/$(OPENJDK_HOTSPOT_ARCH)/client
-	touch $(STAGING_DIR)/hotspot/jre/lib/$(OPENJDK_HOTSPOT_ARCH)/server/Xusage.txt
-	ln -sf libjvm.so $(STAGING_DIR)/hotspot/jre/lib/$(OPENJDK_HOTSPOT_ARCH)/client/libjsig.so
+	#ln -sf server $(STAGING_DIR)/hotspot/jre/lib/$(OPENJDK_HOTSPOT_ARCH)/client
+	#touch $(STAGING_DIR)/hotspot/jre/lib/$(OPENJDK_HOTSPOT_ARCH)/server/Xusage.txt
+	#ln -sf libjvm.so $(STAGING_DIR)/hotspot/jre/lib/$(OPENJDK_HOTSPOT_ARCH)/client/libjsig.so
 	chmod +x $(@D)/configure
 	cd $(@D); ./configure $(OPENJDK_CONF_OPTS) OBJCOPY=$(TARGET_OBJCOPY) STRIP=$(TARGET_STRIP) CPP=$(TARGET_CPP) CXX=$(TARGET_CXX) CC=$(TARGET_CC) LD=$(TARGET_LD)
 endef
