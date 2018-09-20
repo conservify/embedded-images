@@ -86,3 +86,11 @@ if [ -d $PRIVATE ]; then
 else
     echo "No local private area."
 fi
+
+
+# This is weird, I know. For some reason when things are hardlinked they end up
+# as empty files on the running system. Everything in the cpio seems fine. This
+# is a work around until I know why exactly.
+for a in `find ${TARGET_DIR}/usr/bin/$a -type f -links +1`; do
+    cp $a{,-TEMP} && mv $a{-TEMP,}
+done
