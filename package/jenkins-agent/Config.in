@@ -1,0 +1,4 @@
+config BR2_PACKAGE_JENKINS_AGENT
+        bool "jenkins-agent"
+        help
+          Jenkins agent.

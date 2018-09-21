@@ -1,0 +1,28 @@
+#!/bin/bash
+
+NAME="jenkins-agent"
+JAVA="/usr/lib/jvm/bin/java"
+JVM_ARGS="-Xms256M -Xmx256M"
+WORKING="/home/jenkins"
+
+# Load configuration data, this is required otherwise I dunno how we get the configuration below.
+if [ -f /etc/private/private.env ]; then
+  . /etc/private/private.env
+fi
+
+# Check the configuration.
+if [ -z "${JENKINS_AGENT_URL}" ]; then
+  logger -t ${NAME} "No configuration."
+  exit 2
+fi
+
+if [ -z "${JENKINS_AGENT_SECRET}" ]; then
+  logger -t ${NAME} "No configuration."
+  exit 2
+fi
+
+# Run the agent.
+while /bin/true; do
+  ${JAVA} ${JVM_ARGS} -jar /var/lib/jenkins/agent.jar -jnlpUrl ${JENKINS_AGENT_URL} -secret ${JENKINS_AGENT_SECRET} -workDir "${WORKING}" 2>&1 | /usr/bin/logger -t ${NAME}
+  sleep 10
+done
