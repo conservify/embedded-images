@@ -11,19 +11,6 @@ index 73f14cc..57dd00b 100644
  GO_SITE = https://storage.googleapis.com/golang
  GO_SOURCE = go$(GO_VERSION).src.tar.gz
  
-diff --git a/package/go/go.mk b/package/go/go.mk
-index 73f14cc..57dd00b 100644
---- a/package/go/go.mk
-+++ b/package/go/go.mk
-@@ -4,7 +4,7 @@
- #
- ################################################################################
- 
--GO_VERSION = 1.10.2
-+GO_VERSION = 1.11
- GO_SITE = https://storage.googleapis.com/golang
- GO_SOURCE = go$(GO_VERSION).src.tar.gz
- 
 diff --git a/package/jamvm/jamvm.mk b/package/jamvm/jamvm.mk
 index 3fcf460..42cfd87 100644
 --- a/package/jamvm/jamvm.mk
@@ -37,37 +24,16 @@ index 3fcf460..42cfd87 100644
  endif
  
  # Needed for autoreconf
-diff --git a/package/go/go.mk b/package/go/go.mk
-index 73f14cc..57dd00b 100644
---- a/package/go/go.mk
-+++ b/package/go/go.mk
-@@ -4,7 +4,7 @@
- #
- ################################################################################
+diff --git a/support/scripts/fix-rpath b/support/scripts/fix-rpath
+index fa138ca..a690bf4 100755
+--- a/support/scripts/fix-rpath
++++ b/support/scripts/fix-rpath
+@@ -56,7 +56,7 @@ EOF
+ # ELF files should not be in these sub-directories
+ HOST_EXCLUDEPATHS="/share/terminfo"
+ STAGING_EXCLUDEPATHS="/usr/include /usr/share/terminfo"
+-TARGET_EXCLUDEPATHS="/lib/firmware"
++TARGET_EXCLUDEPATHS="/lib/firmware /usr/lib/jvm"
  
--GO_VERSION = 1.10.2
-+GO_VERSION = 1.11
- GO_SITE = https://storage.googleapis.com/golang
- GO_SOURCE = go$(GO_VERSION).src.tar.gz
- 
-diff --git a/package/jamvm/jamvm.mk b/package/jamvm/jamvm.mk
-index 3fcf460..d10260b 100644
---- a/package/jamvm/jamvm.mk
-+++ b/package/jamvm/jamvm.mk
-@@ -14,14 +14,12 @@ JAMVM_AUTORECONF = YES
- # int inlining seems to crash jamvm, don't build shared version of internal lib
- JAMVM_CONF_OPTS = \
- 	--with-classpath-install-dir=/usr \
--	--disable-int-inlining \
--	--disable-shared \
--	--without-pic
-+	--disable-int-inlining
- 
- # jamvm has ARM assembly code that cannot be compiled in Thumb2 mode,
- # so we must force traditional ARM mode.
- ifeq ($(BR2_arm),y)
--JAMVM_CONF_ENV = CFLAGS="$(TARGET_CFLAGS) -marm"
-+JAMVM_CONF_ENV = CFLAGS="$(TARGET_CFLAGS) -marm -march=armv7-a"
- endif
- 
- # Needed for autoreconf
+ main() {
+     local rootdir

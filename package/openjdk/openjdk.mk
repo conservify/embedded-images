@@ -74,6 +74,8 @@ endef
 define OPENJDK_INSTALL_TARGET_CMDS
 	mkdir -p $(TARGET_DIR)/usr/lib/jvm/
 	cp -aLrf $(@D)/build/*/jdk/* $(TARGET_DIR)/usr/lib/jvm/
+  rm -f $(TARGET_DIR)/usr/lib/jvm/lib/libjsig.so
+  rm -f $(TARGET_DIR)/usr/lib/jvm/lib/libjvm.so
 	cp -arf $(@D)/build/*/jdk/lib/$(OPENJDK_VARIANT)/libjsig.so $(TARGET_DIR)/usr/lib/jvm/lib/
 	cp -arf $(@D)/build/*/jdk/lib/$(OPENJDK_VARIANT)/libjvm.so $(TARGET_DIR)/usr/lib/jvm/lib/
 endef

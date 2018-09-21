@@ -23,4 +23,4 @@ buildroot-2018.08:
 	done
 
 buildroot-2018.08/output/images/sdcard.img: buildroot-2018.08
-	cd buildroot-2018.08 && make BR2_EXTERNAL=../ conservify-glacier_defconfig && make
+	cd buildroot-2018.08 && make BR2_EXTERNAL=../ conservify-wifi-station_defconfig && make
