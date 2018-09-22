@@ -2,7 +2,6 @@
 # See http://buildroot.org/manual.html#rootfs-custom
 
 kernel=zImage
-initramfs rootfs.cpio.gz
 
 # Disable overscan assuming the display supports displaying the full resolution
 # If the text shown on the screen disappears off the edge, comment this out
