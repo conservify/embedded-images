@@ -7,8 +7,6 @@
 #
 ################################################################################
 
-#Version is the same as OpenJDK HG tag
-
 OPENJDK_VERSION = jdk-10+46
 OPENJDK_RELEASE = jdk10u
 OPENJDK_PROJECT = jdk-updates
@@ -22,37 +20,28 @@ OPENJDK_CONF_OPTS = \
 	--with-jvm-interpreter=cpp \
 	--with-jvm-variants=zero \
 	--enable-openjdk-only \
-  --with-stdc++lib=static \
+	--with-stdc++lib=static \
 	--with-jvm-variants=$(OPENJDK_VARIANT) \
 	--with-freetype-include=$(STAGING_DIR)/usr/include/freetype2 \
 	--with-freetype-lib=$(STAGING_DIR)/usr/lib \
-  --with-freetype=$(STAGING_DIR)/usr/ \
-  --with-debug-level=release \
-  --openjdk-target=$(GNU_TARGET_NAME) \
+	--with-freetype=$(STAGING_DIR)/usr/ \
+	--with-debug-level=release \
+	--openjdk-target=$(GNU_TARGET_NAME) \
 	--with-sys-root=$(STAGING_DIR) \
 	--with-tools-dir=$(HOST_DIR) \
 	--disable-freetype-bundling \
-  --enable-unlimited-crypto \
+	--enable-unlimited-crypto \
 	--with-extra-cflags='-Wno-shift-negative-value -Wno-maybe-uninitialized -Wno-implicit-fallthrough -I$(@D)/../uclibc-1.0.30/libpthread/nptl_db' \
 	--with-extra-cxxflags='-Wno-implicit-fallthrough' \
-  --with-x
+	--with-x
 
 OPENJDK_MAKE_OPTS = all CONF=linux-$(TARGET_ARCH)-normal-zero-release
-OPENJDK_DEPENDENCIES = alsa-lib host-pkgconf libffi cups freetype xlib_libXrender xlib_libXt xlib_libXext xlib_libXtst libusb fontconfig
+OPENJDK_DEPENDENCIES = host-pkgconf fontconfig xlib_libXrender xlib_libXt xlib_libXext xlib_libXtst cups alsa-lib
 
 OPENJDK_LICENSE = GPLv2+ with exception
 OPENJDK_LICENSE_FILES = COPYING
 
 define OPENJDK_CONFIGURE_CMDS
-	#mkdir -p $(STAGING_DIR)/hotspot/lib
-	#touch $(STAGING_DIR)/hotspot/lib/sa-jdi.jar
-	#mkdir -p $(STAGING_DIR)/hotspot/jre/lib/$(OPENJDK_HOTSPOT_ARCH)/server
-	#cp $(TARGET_DIR)/usr/lib/libjvm.so $(STAGING_DIR)/hotspot/jre/lib/$(OPENJDK_HOTSPOT_ARCH)/server
-	#mkdir -p $(STAGING_DIR)/usr/lib/jvm/lib/$(OPENJDK_HOTSPOT_ARCH)/server
-	#cp $(TARGET_DIR)/usr/lib/libjvm.so $(STAGING_DIR)/usr/lib/jvm/lib/$(OPENJDK_HOTSPOT_ARCH)/server
-	#ln -sf server $(STAGING_DIR)/hotspot/jre/lib/$(OPENJDK_HOTSPOT_ARCH)/client
-	#touch $(STAGING_DIR)/hotspot/jre/lib/$(OPENJDK_HOTSPOT_ARCH)/server/Xusage.txt
-	#ln -sf libjvm.so $(STAGING_DIR)/hotspot/jre/lib/$(OPENJDK_HOTSPOT_ARCH)/client/libjsig.so
 	chmod +x $(@D)/configure
 	cd $(@D); ./configure $(OPENJDK_CONF_OPTS) OBJCOPY=$(TARGET_OBJCOPY) STRIP=$(TARGET_STRIP) CPP=$(TARGET_CPP) CXX=$(TARGET_CXX) CC=$(TARGET_CC) LD=$(TARGET_LD)
 endef
@@ -74,8 +63,8 @@ endef
 define OPENJDK_INSTALL_TARGET_CMDS
 	mkdir -p $(TARGET_DIR)/usr/lib/jvm/
 	cp -aLrf $(@D)/build/*/jdk/* $(TARGET_DIR)/usr/lib/jvm/
-  rm -f $(TARGET_DIR)/usr/lib/jvm/lib/libjsig.so
-  rm -f $(TARGET_DIR)/usr/lib/jvm/lib/libjvm.so
+	rm -f $(TARGET_DIR)/usr/lib/jvm/lib/libjsig.so
+	rm -f $(TARGET_DIR)/usr/lib/jvm/lib/libjvm.so
 	cp -arf $(@D)/build/*/jdk/lib/$(OPENJDK_VARIANT)/libjsig.so $(TARGET_DIR)/usr/lib/jvm/lib/
 	cp -arf $(@D)/build/*/jdk/lib/$(OPENJDK_VARIANT)/libjvm.so $(TARGET_DIR)/usr/lib/jvm/lib/
 endef
