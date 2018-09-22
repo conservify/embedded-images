@@ -1,0 +1,4 @@
+config BR2_PACKAGE_WIREGUARD_QUICK
+        bool "wireguard-quick"
+        help
+          The wg-quick script for wireguard.

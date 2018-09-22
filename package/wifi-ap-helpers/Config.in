@@ -1,0 +1,4 @@
+config BR2_PACKAGE_WIFI_AP_HELPERS
+        bool "wifi-ap-helpers"
+        help
+          Scripts for starting a quick WiFi AP.
