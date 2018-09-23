@@ -1,0 +1,4 @@
+config BR2_PACKAGE_CONSERVIFY_TUNNELS
+        bool "conservify-tunnels"
+        help
+          Tunnels to our cloud servers.

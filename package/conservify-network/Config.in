@@ -1,0 +1,4 @@
+config BR2_PACKAGE_CONSERVIFY_NETWORK
+        bool "conservify-network"
+        help
+          Network scripts.

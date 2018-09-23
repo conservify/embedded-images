@@ -5,4 +5,7 @@ menu "Conservify"
      source "$BR2_EXTERNAL_CONSERVIFY_PATH/package/wireguard-quick/Config.in"
      source "$BR2_EXTERNAL_CONSERVIFY_PATH/package/wifi-ap-helpers/Config.in"
      source "$BR2_EXTERNAL_CONSERVIFY_PATH/package/initramfs-readonly/Config.in"
+     source "$BR2_EXTERNAL_CONSERVIFY_PATH/package/conservify-network/Config.in"
+     source "$BR2_EXTERNAL_CONSERVIFY_PATH/package/conservify-tunnels/Config.in"
+     source "$BR2_EXTERNAL_CONSERVIFY_PATH/package/data-partition-tools/Config.in"
 endmenu

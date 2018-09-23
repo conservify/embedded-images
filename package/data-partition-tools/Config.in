@@ -1,0 +1,4 @@
+config BR2_PACKAGE_DATA_PARTITION_TOOLS
+        bool "data-partition-tools"
+        help
+          Tools to maintaining a non-volatile data partition.
