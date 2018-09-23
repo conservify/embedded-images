@@ -21,6 +21,11 @@ if [ -z "${JENKINS_AGENT_SECRET}" ]; then
   exit 2
 fi
 
+if [ ! -f ${JAVA} ]; then
+  logger -t ${NAME} "No java!"
+  exit 2
+fi
+
 # Run the agent.
 while /bin/true; do
   ${JAVA} ${JVM_ARGS} -jar /var/lib/jenkins/agent.jar -jnlpUrl ${JENKINS_AGENT_URL} -secret ${JENKINS_AGENT_SECRET} -workDir "${WORKING}" 2>&1 | /usr/bin/logger -t ${NAME}
