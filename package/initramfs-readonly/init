@@ -7,12 +7,20 @@ mount -t sysfs none /sys
 # Populate /dev
 echo /sbin/mdev > /proc/sys/kernel/hotplug
 mdev -s
- 
-# Do overlayfs magic
+
+# Wait for card?
+sleep 5
+
+# Create mounting locations and overlay things.
+mkdir -p /mnt/root-ro
 mount -o ro /dev/mmcblk0p2 /mnt/root-ro
+
+mkdir -p /mnt/root-rw
 mount -t tmpfs tmpfs /mnt/root-rw
 mkdir /mnt/root-rw/upper
 mkdir /mnt/root-rw/work
+
+mkdir -p /rootfs
 mount -t overlay overlay -o lowerdir=/mnt/root-ro,upperdir=/mnt/root-rw/upper,workdir=/mnt/root-rw/work /rootfs
  
 # Move mounts
