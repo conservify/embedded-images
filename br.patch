@@ -1,3 +1,18 @@
+diff --git a/package/e2fsprogs/e2fsprogs.mk b/package/e2fsprogs/e2fsprogs.mk
+index efc10d0..5664ba9 100644
+--- a/package/e2fsprogs/e2fsprogs.mk
++++ b/package/e2fsprogs/e2fsprogs.mk
+@@ -41,8 +41,8 @@ E2FSPROGS_CONF_OPTS = \
+ 	$(if $(BR2_PACKAGE_E2FSPROGS_FSCK),--enable-fsck,--disable-fsck) \
+ 	$(if $(BR2_PACKAGE_E2FSPROGS_RESIZE2FS),--enable-resizer,--disable-resizer) \
+ 	--disable-uuidd \
+-	--disable-libblkid \
+-	--disable-libuuid \
++	--enable-libblkid \
++	--enable-libuuid \
+ 	--disable-e2initrd-helper \
+ 	--disable-testio-debug \
+ 	--disable-rpath \
 diff --git a/package/go/go.mk b/package/go/go.mk
 index 73f14cc..57dd00b 100644
 --- a/package/go/go.mk
