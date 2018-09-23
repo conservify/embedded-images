@@ -26,4 +26,3 @@ buildroot-2018.08: buildroot-2018.08.tar.gz
 
 buildroot-2018.08.tar.gz:
 	wget http://buildroot.uclibc.org/downloads/buildroot-2018.08.tar.gz
-

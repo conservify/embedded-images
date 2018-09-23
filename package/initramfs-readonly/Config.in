@@ -1,0 +1,4 @@
+config BR2_PACKAGE_INITRAMFS_READONLY
+        bool "initramfs-readonly"
+        help
+          Scripts for building an initramfs that mounts a root partition readonly

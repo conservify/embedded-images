@@ -1,0 +1,28 @@
+#!/bin/busybox sh
+
+# Mount the /proc and /sys filesystems.
+mount -t proc none /proc
+mount -t sysfs none /sys
+ 
+# Populate /dev
+echo /sbin/mdev > /proc/sys/kernel/hotplug
+mdev -s
+ 
+# Do overlayfs magic
+mount -o ro /dev/mmcblk0p2 /mnt/root-ro
+mount -t tmpfs tmpfs /mnt/root-rw
+mkdir /mnt/root-rw/upper
+mkdir /mnt/root-rw/work
+mount -t overlay overlay -o lowerdir=/mnt/root-ro,upperdir=/mnt/root-rw/upper,workdir=/mnt/root-rw/work /rootfs
+ 
+# Move mounts
+mount --move /mnt/root-ro /rootfs/mnt/root-ro
+mount --move /mnt/root-rw /rootfs/mnt/root-rw
+
+mount -t devtmpfs devtmpfs /rootfs/dev
+
+# Clean up.
+umount /proc
+umount /sys
+
+exec switch_root /rootfs /bin/busybox init
