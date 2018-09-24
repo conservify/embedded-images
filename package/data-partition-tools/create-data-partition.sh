@@ -20,7 +20,7 @@ EOF
 fi
 
 # Check to see if the partition is valid and create a file system if we need to.
-if ! blkid $PARTITION; then
+if ! blkid $PARTITION | grep ext4; then
     mkfs.ext4 $PARTITION
 fi
 
