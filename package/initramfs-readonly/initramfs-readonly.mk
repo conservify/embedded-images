@@ -6,7 +6,7 @@
 
 INITRAMFS_READONLY_VERSION = master
 INITRAMFS_READONLY_SITE = $(call github,raspberrypi,target_fs,$(INITRAMFS_READONLY_VERSION))
-INITRAMFS_READONLY_DEPENDENCIES = rpi-firmware rpi-wifi-firmware
+INITRAMFS_READONLY_DEPENDENCIES = rpi-firmware rpi-wifi-firmware data-partition-tools
 
 define INITRAMFS_READONLY_BUILD_CMDS
 	rm -f $(@D)/init
@@ -22,6 +22,7 @@ define INITRAMFS_READONLY_BUILD_CMDS
   $(INSTALL) -m 0755 -d $(@D)/rootfs/root-rw
   $(INSTALL) -m 0755 -d $(@D)/lib/firmware/brcm
   $(INSTALL) -m 0644 -t $(@D)/lib/firmware/brcm/ $(TARGET_DIR)/lib/firmware/brcm/*
+  $(INSTALL) -m 0755 -t $(@D)/bin $(TARGET_DIR)/bin/create-data-partition.sh
 
 	(cd $(@D) && find . -name .git -a -type d -prune -o -name "initramfs.*" -type f -prune -o -print | cpio -o -H newc > $(@D)/initramfs.cpio)
 	gzip -c $(@D)/initramfs.cpio > $(@D)/initramfs.cpio.gz
