@@ -1,0 +1,1 @@
+*/15 * * * * /bin/fake-hwclock | /usr/bin/logger -t fake-hwclock
